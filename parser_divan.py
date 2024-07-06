@@ -1,12 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.common.keys import Keys
 import time
 import csv
-# import pandas as pd
-# import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
 
 driver = webdriver.Chrome()
 
@@ -60,3 +57,33 @@ print(f"Обработанные данные сохранены в файл {ou
 
 # Закрытие драйвера
 driver.quit()
+
+# Загрузка данных из CSV-файла
+file_path = 'pure_prices.csv'
+data = pd.read_csv(file_path)
+
+
+# Предположим, что столбец с ценами называется 'price'
+prices = data['Price']
+
+
+# Вычисление средней цены
+average_price = round(prices.mean(), 2)
+print(f"Средняя цена: {average_price} руб.")
+
+
+# Построение гистограммы
+plt.hist(prices, bins=10, edgecolor='black')
+
+
+plt.axvline(average_price, color='red', linestyle='dashed', linewidth=1)
+
+
+# Добавление заголовка и меток осей
+plt.title('Гистограмма цен')
+plt.xlabel('Цена')
+plt.ylabel('Частота')
+
+
+# Показать гистограмму
+plt.show()
