@@ -16,7 +16,8 @@ driver.get(url)
 time.sleep(5)
 
 # Получаем элементы с ценами
-prices = driver.find_elements(By.XPATH, '//span[@class="ui-LD-ZU OtETQ"]')
+prices = driver.find_elements(By.XPATH, '//span[@class="ui-LD-ZU OtETQ" and @data-testid="price"]')
+# <span class="ui-LD-ZU OtETQ" data-testid="price"></span>
 
 # Парсим и выводим цены
 for price in prices:
